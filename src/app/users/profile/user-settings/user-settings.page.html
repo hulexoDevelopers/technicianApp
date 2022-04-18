@@ -1,0 +1,92 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tab/profile"></ion-back-button>
+      </ion-buttons>
+      <ion-title size="small" slot="" class="ion-text-center">
+        User Settings
+      </ion-title>
+     
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="marbalace">
+    <ion-grid>
+        <ion-row *ngIf="isDataLoad">
+            <ion-col size="12">
+                <h1>Update Personal Information</h1>
+                <form class="form-auth-small mt-2" id="registerForm" name="registerForm"
+                    (ngSubmit)="f.form.valid && updateProfile()" #f="ngForm" novalidate>
+                    <ion-list>
+                        <ion-item class="box" lines="none">
+                            <ion-label color="medium" position="floating">First Name</ion-label>
+                            <ion-input type="text" [(ngModel)]="user.firstName" name="fName" #fName="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && fName.invalid }" required></ion-input>
+                        </ion-item>
+                        <span class="error ion-padding" *ngIf="f.submitted && fName.invalid">
+                            First Name is required
+                        </span>
+
+                        <ion-item class="box" lines="none">
+                            <ion-label color="medium" position="floating">Last Name</ion-label>
+                            <ion-input type="text" [(ngModel)]="user.lastName" name="lName" #lName="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && lName.invalid }" required></ion-input>
+                        </ion-item>
+                        <span class="error ion-padding" *ngIf="f.submitted && lName.invalid">
+                            Last Name is required
+                        </span>
+                        <ion-item class="box" lines="none">
+                            <ion-label color="medium" position="floating">Contact</ion-label>
+                            <ion-input type="tel" [(ngModel)]="user.contact" #contact="ngModel" name="contact"
+                                [ngClass]="{ 'is-invalid': f.submitted && contact.invalid }" required></ion-input>
+
+                        </ion-item>
+                        <span class="error ion-padding" *ngIf="f.submitted && contact.invalid">
+                            Contact is required
+                        </span>
+
+                        
+                            <ion-button type="submit" size="medium" class="loginbtn" color="primary" expand="block">Update Personal Information</ion-button>
+
+                        
+                    </ion-list>
+                </form>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <h1>Change Password</h1>
+                <form class="form-auth-small mt-2" id="registerForm" name="passForm"
+                    (ngSubmit)="pf.form.valid && updateUserPassword()" #pf="ngForm" novalidate>
+                    <ion-list>
+                        <ion-item class="box" lines="none">
+                            <ion-label size="medium" position="floating">Current Password</ion-label>
+                            <ion-input type="text" name="password" type="password" placeholder="*******"
+                                [(ngModel)]="oldPassword" #op="ngModel"
+                                [ngClass]="{ 'is-invalid': pf.submitted && op.invalid }" required></ion-input>
+                        </ion-item>
+                        <span class="error ion-padding" *ngIf="pf.submitted && op.invalid">
+                            Please enter your previous password
+                        </span>
+
+
+                        <ion-item class="box" lines="none">
+                            <ion-label size="medium" position="floating">New Password</ion-label>
+                            <ion-input type="text" [(ngModel)]="newPassword" name="np" type="password"
+                                placeholder="*******" #np="ngModel"
+                                [ngClass]="{ 'is-invalid': pf.submitted && np.invalid }" required></ion-input>
+                        </ion-item>
+                        <span class="error ion-padding" *ngIf="pf.submitted && np.invalid">
+                            Please enter your new password
+                        </span>
+
+
+                        <ion-button type="submit" size="medium" class="loginbtn" color="primary" expand="block">Update Password</ion-button>
+
+                        
+                    </ion-list>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

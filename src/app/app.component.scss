@@ -1,0 +1,66 @@
+ion-toolbar {
+  --background    : linear-gradient(245.35deg, #336379 -28.33%, #003C57 84.14%);
+  --ion-color-base: #003C57 !important;
+  --color         : var(--ion-color-light);
+  --padding-start : 0px;
+  --padding-end   : 0px;
+  --padding-top   : 20px;
+  --padding-bottom: 20px;
+}
+
+ion-header {
+  &.header-md:after {
+    background: none;
+  }
+}
+
+ion-content {
+  --background: #EFA41F;
+  --color     : var(--ion-color-light);
+}
+
+ion-list,
+.list-md {
+  --background  : #EFA41F;
+  --color       : var(--ion-color-light);
+  padding-top   : 0px;
+  padding-bottom: 0px;
+}
+
+ion-item {
+  --background      : #EFA41F;
+  --color           : var(--ion-color-light);
+  // --padding-start:30px;
+}
+
+.ion-padding {
+  --padding-start : var(--ion-padding, 8px);
+  --padding-end   : var(--ion-padding, 8px);
+  --padding-top   : var(--ion-padding, 8px);
+  --padding-bottom: var(--ion-padding, 8px);
+  padding-left    : var(--ion-padding, 8px);
+  padding-right   : var(--ion-padding, 8px);
+  padding-top     : var(--ion-padding, 8px);
+  padding-bottom  : var(--ion-padding, 8px);
+}
+
+ion-icon {
+  color    : #ffffff;
+  font-size: 20px;
+}
+
+.userprof {
+  padding-top   : 25px;
+  margin-bottom : 20px;
+  font-size     : 18px;
+  padding-bottom: 15px;
+  border-bottom : 0px solid #003C57;
+  text-align    : center;
+  background    : #ffffff;
+  color: #003C57;;
+}
+
+.useravatar ion-icon {
+  font-size: 64px;
+  color: #ffffff;
+}

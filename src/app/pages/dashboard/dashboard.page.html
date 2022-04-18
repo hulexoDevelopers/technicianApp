@@ -1,0 +1,75 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title size="medium" class="ion-margin-left">
+            Dashboard
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-toggle color="success" *ngIf="isLoad" [(ngModel)]="isActive" (ionChange)="myChange($event)"></ion-toggle>
+            <ion-button>
+                <ion-badge *ngIf="isActive && isLoad" color="success" slot="end">Online</ion-badge>
+                <ion-badge *ngIf="!isActive && isLoad" color="danger" slot="end">Offline
+                </ion-badge>
+                <!-- <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon> -->
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <div class="dashboardhead">
+        <ion-img class="dashboard-img" src="assets/img/dashboard.jpg">
+        </ion-img>
+        <ion-text class="dashboardtitle">
+            <h2>Dash<span>Board</span></h2>
+        </ion-text>
+    </div>
+
+    <section class="dashsummery">
+        <ion-text color="primary" class="pageheading">
+            <h3 class="pageheading">Technician Summary</h3>
+        </ion-text>
+        <ion-grid>
+            <ion-row>
+                <ion-col size-sm="12" size="12" class="ion-text-center">
+                    <ion-card [routerLink]="['/orders-filter', 'all']" color="primary">
+                        <ion-card-header>
+                            <ion-card-title class="ion-padding-horizontal">Total Jobs</ion-card-title>
+                            <ion-card-subtitle class="ion-padding-horizontal">{{totalJobs}}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-card>
+                </ion-col>
+
+                <ion-col size-sm="12" size="12" class="ion-text-center">
+                    <ion-card [routerLink]="['/orders-filter', 'completed']" color="success">
+                        <ion-card-header>
+                            <ion-card-title class="ion-padding-horizontal">Completed</ion-card-title>
+                            <ion-card-subtitle class="ion-padding-horizontal">{{totalCompleted}}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size-sm="12" size="12" class="ion-text-center">
+                    <ion-card [routerLink]="['/orders-filter', 'pending']" color="secondary">
+                        <ion-card-header>
+                            <ion-card-title class="ion-padding-horizontal">Total Pending</ion-card-title>
+                            <ion-card-subtitle class="ion-padding-horizontal">{{totalPending}}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-card>
+                </ion-col>
+
+                <ion-col size-sm="12" size="12" class="ion-text-center">
+                    <ion-card [routerLink]="['/orders-filter', 'rejected']" color="danger">
+                        <ion-card-header>
+                            <ion-card-title class="ion-padding-horizontal">Total Rejected</ion-card-title>
+                            <ion-card-subtitle class="ion-padding-horizontal">{{totalRejected}}</ion-card-subtitle>
+                        </ion-card-header>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </section>
+</ion-content>

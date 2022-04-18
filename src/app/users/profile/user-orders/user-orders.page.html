@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small" slot="" class="ion-text-center">
+      User Orders
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="marbalace">
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="12">
+        <h1>My Orders</h1>
+        <div *ngIf="!isOrders && dataLoad" class="noordermsg">Sorry! there is no active order currently.
+        </div>
+        <section class="orderdetails" *ngIf="isOrders">
+          <ion-card class="ordersummery" *ngFor="let order of allOrders;let i=index">
+            <div class="planimg">
+              <!-- [src]="item.imageUrl != '' ? item.imageUrl : '../../../../assets/img/mealcompany-placeholder.jpg'" /> -->
+              <img  [defaultImage]="defaultImage" [lazyLoad]="plans[i].imageUrl"/>
+              <!-- <img   [src]="plans[i].imageUrl != '' ? plans[i].imageUrl : '../../../../assets/img/meal-placeholder.jpg'"  alt="meal image" /> -->
+              <span class="compatitle">{{companies[i].title}}</span>
+            </div>
+
+            <div class="mealdesc">
+              <h3>{{plans[i].title}}</h3>
+              <p>{{plans[i].detail}}
+              </p>
+            </div>
+
+            <div class="mealadds">
+              <p class="mealaddline"> <span> <img src="../../../../assets/img/fire.png" alt="calories" width="18px" />
+                </span>
+                <span class="addontxt"><strong>{{plans[i].calories}}</strong> calories /day</span>
+              </p>
+              <p class="mealaddline"> <span> <img src="../../../../assets/img/cereal.png" alt="calories" width="18px" />
+                </span> <span class="addontxt"><strong>{{plans[i].mealDays}} meals, 3 snaks</strong> /day</span> </p>
+              <p class="mealaddline"> <span> <img src="../../../../assets/img/calendar.png" alt="calories"
+                    width="18px" /> </span> <span class="addontxt"><strong> 5/6 days</strong> / week</span> </p>
+            </div>
+
+            <div class="mealcardbottom">
+              <p class="mealbudget"><span class="startfrom">Paid amount</span> <span>{{order.paymentDetail[0].totalPrice
+                  | currency
+                  : 'Aed '}}</span></p>
+              <p class="mealbudget"><span class="startfrom">Order date</span> <span>{{order.created_at | date}}</span>
+              </p>
+            </div>
+
+            <div class="shipinfo">
+              <h4>Shipping Address</h4>
+              <!-- <h6>{{order.orderDetail[0].address}}</h6> -->
+              <!-- <p>{{user.email}}</p> -->
+              <!-- <p>{{user.contact}}</p> -->
+              <p>{{order.orderDetail[0].address}} , {{order.orderDetail[0].state}}</p>
+            </div>
+
+            <div class="pausebtn" *ngIf="order.validPause && order.isPauseRequest == false">
+              <ion-button type="button" (click)="pauseRequest(order,i)" size="medium" color="primary">Pause Request
+              </ion-button>
+            </div>
+
+            <ion-item class="box" lines="none" *ngIf="isPauseRequest && activeIndex == i">
+              <ion-label color="medium">
+                <ion-icon name="calendar"></ion-icon> Continue Date
+              </ion-label>
+              <ion-datetime (ionChange)="pauseOrder($event)"  [min]="minDate | date:'yyyy-MM-dd'" placeholder="Continue Date" [(ngModel)]="continueDate"
+                #sdate="ngModel" name="startdate" required></ion-datetime>
+            </ion-item>
+
+          </ion-card>
+
+
+
+
+          <!-- <div *ngIf="f.submitted && sdate.invalid" class="error invalid-feedback">
+            <div *ngIf="sdate.errors.required">Please select start date</div>
+          </div> -->
+        </section>
+      </ion-col>
+    </ion-row>
+
+
+
+
+
+
+
+  </ion-grid>
+</ion-content>

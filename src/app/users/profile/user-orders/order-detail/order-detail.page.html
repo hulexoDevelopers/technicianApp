@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Job Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-icon class="ion-margin" [routerLink]="['/tab/profile/user-orders']" routerLinkActive="router-link-active"
+    routerDirection="back" name="arrow-back"></ion-icon>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <section class="orderdetails" *ngIf="orderData">
+          <div class="mealorder">
+            <div class="orderplan">
+              <div class="orderno">
+                <h1>Job No {{orderData.orderNo}}</h1>
+              </div>
+              <div class="meals">
+                <p>Meal Plan : <span class="meal-name">{{planData.title}}</span></p>
+              </div>
+              <div class="timeduration">
+                <p>Duration: <span class="meal-days">{{orderData.orderDetail[0].package.days}} Days</span> </p>
+              </div>
+
+            </div>
+            <div class="mealtotal">
+              <h1>{{orderData.created_at | date}}</h1>
+              <h2>total:<span>{{orderData.paymentDetail[0].totalPrice}} AED</span> </h2>
+              <a href="#" class="deliverd-link">{{orderData.status}}</a>
+            </div>
+
+
+          </div>
+        </section>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

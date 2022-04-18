@@ -1,0 +1,83 @@
+.orderspage {
+    margin-top: 15px;
+}
+
+.detstatus {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 20px;
+}
+
+.ordrstatus ion-badge {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.ordrtitle {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+}
+
+.ordercard {
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+
+.confirm-btn {
+    background: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+}
+
+.confirm-btn ion-button {
+    margin-bottom: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    background-color: #ffffff !important;
+}
+
+ion-select {
+    background-color: #ffffff !important;
+}
+
+.trackdip {
+    margin-top: 10px;
+}
+
+.trackdip a,
+.trackdip span {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+}
+
+.price input {
+    border: 1px solid #d5d5d5;
+    padding: 7px 5px;
+    border-radius: 4px;
+}
+
+ion-toggle {
+    --handle-box-shadow: 0 3px 12px rgba(255, 0, 0, 0.6), 0 3px 1px rgba(50, 70, 255, 0.6);
+    overflow: visible;
+    contain: none;
+}
+
+ion-toggle.toggle-checked {
+    --handle-box-shadow: -4px 0 2px 0 green;
+}

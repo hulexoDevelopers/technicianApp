@@ -1,0 +1,88 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/tab/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title size="small" slot="" class="ion-text-center">
+      Profile
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="profilepage">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <section class="userprofile" *ngIf="isLoad && userData">
+          <h1>My Profile</h1>
+          <div class="userinfoper">
+            <div class="userimg"><img src="assets/img/chat-avatar-user.png" alt=""></div>
+            <div class="userinfo">
+              <h4 class="username">{{userData.firstName}} {{userData.lastName}}</h4>
+              <p class="usermail">{{userData.email}}</p>
+            </div>
+          </div>
+        </section>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="mart-30">
+      <ion-col>
+        <ion-item [routerLink]="['/tab/profile/user-orders']" routerLinkActive="router-link-active"
+          routerDirection="forward" detail="false" mode='md' class="ion-margin-vertical">
+          <ion-label>
+            <h3 ion-text color="primary">My Orders</h3>
+            <p>Aleady have {{totalOrders}} orders</p>
+          </ion-label>
+          <ion-icon name="arrow-forward" slot="end" color="primary"></ion-icon>
+        </ion-item>
+        <ion-item [routerLink]="['/tab/profile/user-settings']" routerLinkActive="router-link-active" detail="false"
+          mode='md' class="ion-margin-vertical">
+          <ion-label>
+            <h3 ion-text color="primary">Settings</h3>
+            <p>Change personal info and password</p>
+          </ion-label>
+          <ion-icon name="arrow-forward" slot="end" color="primary"></ion-icon>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

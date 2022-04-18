@@ -1,0 +1,15 @@
+.headerpopup {
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --padding-top: 60px;
+}
+
+.active-status {
+  background-color: #2aa952;
+  color: #fff !important;
+}
+.danger-active-status {
+  background-color: red;
+  color: #fff !important;
+  border: 1px solid red
+}

@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border" collapse="fade" [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title size="medium" class="ion-text-center">
+            My Jobs
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-toggle color="success" [(ngModel)]="isActive" (ionChange)="myChange($event)"></ion-toggle>
+            <ion-button>
+                <ion-badge *ngIf="isActive && isLoad" color="success" slot="end">Online</ion-badge>
+                <ion-badge *ngIf="!isActive && isLoad" color="danger" slot="end">Offline
+                </ion-badge>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="container">
+        <section class="menupills">
+            <a href="javascript:void(0)" (click)="filterJobs('all')">All</a>
+            <a href="javascript:void(0)" (click)="filterJobs('completed')">Completed</a>
+            <a href="javascript:void(0)" (click)="filterJobs('pending')">Pending</a>
+            <a href="javascript:void(0)" (click)="filterJobs('rejected')">Rejected</a>
+
+        </section>
+        <section class="booking-card" *ngFor="let item of allJobs">
+            <div class="ordercard">
+                <div class="orderhead">
+                    <h3>Job No. - {{item.detail[0].inquiryId}}</h3>
+
+                    <p class="orderdate">{{item.created_at | date}}</p>
+                </div>
+                <div class="orderdetails">
+                    <h3>Status - {{item.status}}</h3>
+                    <p> <span> Location:</span> {{item.detail[0].address[0].address}}
+                    </p>
+                    <p> <span>Type:</span> {{item.detail[0].serviceType}}
+                    </p>
+                </div>
+                <div class="orderhead">
+                    <a href="javascript:void(0)" class="ordertr" [routerLink]="['/orders/order-detail', item._id]" routerLinkActive="router-link-active">Details</a>
+                    <a class="active" href="javascript:void(0)">{{item.orderStatus}}</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</ion-content>

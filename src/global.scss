@@ -1,0 +1,1232 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+
+/* Core CSS required for Ionic components to work properly */
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700&display=swap');
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 {
+    font-family: 'Racing Sans One', cursive;
+    font-size: 36px;
+}
+
+h2 {
+    font-family: 'Racing Sans One', cursive;
+    font-size: 28px;
+}
+
+h3 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px;
+}
+
+h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+// Global CSS
+ion-toolbar {
+    --background: linear-gradient(245.35deg, #336379 -28.33%, #003C57 84.14%);
+    --color: var(--ion-color-light);
+}
+
+ion-header {
+    &.header-md:after {
+        background: none;
+    }
+}
+
+ion-content {
+    --background: #FFFFFF;
+}
+
+.formbox2 {
+    padding: 35px 15px;
+}
+
+.formbox2 ion-item {
+    --border-width: 1px;
+    --border-color: #ffffff00;
+    --background: #FFFFFF;
+    --box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+    --border-radius: 4px;
+    --font-family: 'Source Sans Pro', sans-serif;
+}
+
+.formbox2 .ngx-dropdown-container .ngx-dropdown-button {
+    width: 100%;
+    min-height: 54px !important;
+    padding: 5px 10px;
+    border: 1px solid #ffffff !important;
+    text-transform: capitalize;
+    font-size: 16px;
+}
+
+.formbox2 .ngx-dropdown-container {
+    width: 100%;
+    position: relative;
+    margin-bottom: 13px;
+}
+
+.formbox2 .ngx-dropdown-container .ngx-dropdown-list-container {
+    text-transform: capitalize;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.roundico {
+    width: 24px;
+    height: 24px;
+    background: #ffffff;
+    color: #000000;
+    border-radius: 100%;
+    // padding: 4px;
+}
+
+.htitle {
+    font-size: 20px !important;
+    font-weight: 600;
+}
+
+ion-item {
+    --highlight-height: 0;
+}
+
+.button-large {
+    font-size: 16px;
+}
+
+.error {
+    font-size: 12px;
+    color: red;
+    margin-left: 15px;
+    margin-top: 2px;
+}
+
+.regsteps {
+    background: rgba(225, 229, 246, 0.5);
+    mix-blend-mode: normal;
+    opacity: 0.8;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 8px 12px;
+}
+
+.regsteps span {
+    font-family: Source Sans Pro;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 120%;
+    color: #FFFFFF;
+}
+
+ion-toolbar ion-toggle {
+    --background: #ff0000;
+    --background-checked: #ff0000;
+    --handle-background: #ffffff;
+    --handle-background-checked: #000;
+    // --handle-box-shadow: 0 3px 12px rgba(255, 0, 0, 0.6), 0 3px 1px rgba(50, 70, 255, 0.6);
+    overflow: visible;
+    contain: none;
+    width: 50px;
+    height: 20px;
+    --handle-spacing: 0px;
+    --handle-border-radius: 14px 4px 4px 14px;
+}
+
+ion-toolbar ion-toggle.toggle-checked {
+    --handle-border-radius: 4px 14px 14px 4px;
+}
+
+// LOGIN SIGN UP PAGES
+.alert-radio-label.sc-ion-alert-md {
+    -webkit-padding-start: 36px;
+    padding-inline-start: 36px;
+    -webkit-padding-end: 26px;
+    padding-inline-end: 26px;
+}
+
+.list-md-lines-full {
+    .item {
+        &.item-lines-none {
+            --border-width: 0;
+        }
+    }
+}
+
+.loginlink {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: right;
+    color: #ffffff;
+    margin-top: 15px;
+    text-transform: none;
+}
+
+.loginbtn {
+    margin-top: 10px;
+    color: #ffffff;
+}
+
+.signuptxt {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    color: #ffffff;
+    margin-top: 25px !important;
+    text-transform: none;
+}
+
+.eye-btn {
+    vertical-align: middle;
+    position: absolute;
+    top: 25px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.0);
+    padding: 0px;
+    font-size: 18px;
+    z-index: 5;
+    ion-icon {
+        color: #7c7c7c;
+        font-size: 18px;
+    }
+}
+
+.dashboardhead {
+    position: relative;
+    height: 35%;
+    width: 100%;
+    .dashboard-img {
+        height: auto;
+        width: 100%;
+        top: 0;
+        position: fixed;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        object-fit: cover;
+        transition: opacity 500ms ease-in-out;
+    }
+    h2 {
+        color: #fff;
+        font-size: 26px;
+        padding-left: 15px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        align-self: end;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(18, 27, 33, 0.756765) 100%);
+        width: 100%;
+    }
+    h2 span {
+        color: #EFA41F;
+        font-size: 26px;
+    }
+    .dashboardtitle {
+        position: relative;
+        display: flex;
+        height: 100%;
+    }
+}
+
+.dashsummery {
+    z-index: 500;
+    position: relative;
+    background: #fff;
+    padding: 25px 20px;
+}
+
+// CUSTOMER LOCATION
+.customap-head {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+.customap-map {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    transition: opacity 500ms ease-in-out;
+    agm-map {
+        height: 100% !important;
+    }
+}
+
+.mapsearch {
+    position: fixed;
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    top: 75px;
+}
+
+.mapsearch input {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 20px;
+    line-height: 120%;
+    border-color: #FFFFFF;
+    border: 1px solid#FFFFFF;
+    height: 48px;
+    min-height: 48px;
+    font-size: 14px;
+    color: #7D7987;
+    width: 100%;
+}
+
+.location-info {
+    margin: 25px 0px 15px 0px;
+    background: rgba(255, 255, 255, 0.90);
+    z-index: 500;
+    padding: 20px 15px;
+    position: absolute;
+    bottom: 0px;
+    max-height: 75%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.nearinfo {
+    padding: 15px 0px 15px 5px;
+    font-size: 14px;
+}
+
+.location-info ion-icon {
+    font-size: 18px;
+    line-height: 120%;
+    margin-right: 5px;
+    width: 32px;
+}
+
+.location-live {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 18px;
+    .location-live p {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        color: #1D262C;
+    }
+    .location-live ion-icon {
+        color: #7D7987;
+    }
+}
+
+.custom-address {
+    padding: 15px 0px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 18px;
+    .custom-address a {
+        font-weight: 400;
+        font-size: 14px;
+        // display: block;
+        line-height: 120%;
+        color: #003C57;
+    }
+    .custom-address ion-icon {
+        color: #003C57;
+    }
+}
+
+a.choobtn {
+    border: 1px solid #84d5f7;
+    padding: 5px 7px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+// CUSTOMER VEHICLE
+.vehiclepage-head {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+.vehiclepage-mapover {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 59, 87, 0.75);
+    top: 0;
+    position: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    transition: opacity 500ms ease-in-out;
+}
+
+.mapoverlocation {
+    position: fixed;
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    top: 75px;
+    z-index: 5;
+}
+
+.mapoverlocation input {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 20px;
+    line-height: 120%;
+    border-color: #FFFFFF;
+    border: 1px solid#FFFFFF;
+    height: 48px;
+    min-height: 48px;
+    font-size: 14px;
+    color: #7D7987;
+    width: 100%;
+}
+
+// .addvehicle{
+//   margin: 25px 0px 15px 0px;
+//   background: rgba(255, 255, 255, 1);
+//   z-index: 505;
+//   padding: 20px 15px;
+//   position: fixed;
+//   bottom: 0px;
+//   max-height: 75%;
+//   overflow-y: auto;
+//   width: 100%;
+// }
+// .addvehicle-txt{
+//   display: flex;
+//   align-items: center;
+//   border-bottom: 1px solid #EAEAEA;
+//   padding-bottom: 18px;
+// }
+// .addvehicle-txt p {
+// font-weight: 600;
+// font-size: 18px;
+// line-height: 120%;
+// color: #1D262C;
+// padding-left: 10px;
+// }
+.addvehicle {
+    margin: 0px;
+    background: rgba(255, 255, 255, 1);
+    padding: 20px 15px;
+    width: 100%;
+}
+
+.addvehicle-txt {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 18px;
+}
+
+.addvehicle-txt p {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 120%;
+    color: #1D262C;
+    padding-left: 10px;
+}
+
+.vehicfoot {
+    background: rgba(255, 255, 255, 1);
+    z-index: 505;
+    padding: 20px 15px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.vehicle-card {
+    background: #fff;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    // box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.05), 0px 0px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin: 12px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.vehicle-card.active {
+    background: #FAFAFA;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.vehicle-det {
+    font-family: Source Sans Pro;
+    padding: 17px 14px;
+}
+
+.vehicle-det h4 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1E2022;
+    text-transform: capitalize;
+}
+
+.vehicle-det .vehrand {
+    font-size: 13px;
+    line-height: 18px;
+    color: #77838F;
+    text-transform: capitalize;
+}
+
+.vehicle-det .nmbplate {
+    font-size: 12px;
+    line-height: 13px;
+    color: #151522;
+    text-transform: capitalize;
+}
+
+.vehicimg {
+    width: 90px;
+    max-width: 90px;
+    height: 100%;
+    max-height: 100%;
+}
+
+.vehicimg img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center right;
+}
+
+.addnewveh {
+    padding: 15px 0px 15px 10px;
+}
+
+.addnewveh a {
+    font-weight: 600;
+    font-size: 16px;
+    display: block;
+    line-height: 120%;
+    color: #003C57;
+}
+
+.addnewveh a i {
+    font-weight: 400;
+    color: #003C57;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+// BATTERY PAGE
+// .recombatteriespage-head {
+//   position: fixed;
+//   height  : 100vh;
+//   width   : 100%;
+// }
+.recombatteries-mapover {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 59, 87, 0.75);
+    top: 0;
+    position: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    transition: opacity 500ms ease-in-out;
+}
+
+.recombatteries {
+    // position: fixed;
+    // display : block;
+    width: 100%;
+    padding: 5px 15px;
+    // top     : 75px;
+    // z-index : 5;
+}
+
+.recombatteries input {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 20px;
+    line-height: 120%;
+    border-color: #FFFFFF;
+    border: 1px solid#FFFFFF;
+    height: 48px;
+    min-height: 48px;
+    font-size: 14px;
+    color: #7D7987;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.recombattlist {
+    // margin    : 25px 0px 15px 0px;
+    background: rgba(255, 255, 255, 1);
+    // z-index   : 505;
+    padding: 20px 15px;
+    // position  : fixed;
+    // bottom    : 0px;
+    // max-height: 65%;
+    // overflow-y: auto;
+    width: 100%;
+}
+
+.recombattlist-txt {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: 18px;
+}
+
+.recombattlist-txt p {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 120%;
+    color: #1D262C;
+    padding-left: 10px;
+}
+
+.rectitle {
+    padding: 12px 0px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #1D262C;
+    background: #F4F4F4;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.battery-card {
+    background: #fff;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    // box-shadow   : 0px 0px 6px rgba(0, 0, 0, 0.05), 0px 0px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 15px 13px;
+    margin: 12px 0px;
+    position: relative;
+}
+
+.battery-card .cardinner {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.battery-card.active {
+    background: #FAFAFA;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 16px #A6A6A6;
+}
+
+.battery-det {
+    font-family: Source Sans Pro;
+}
+
+.battery-det h4 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1E2022;
+    text-transform: uppercase;
+}
+
+.battery-det .batrand {
+    font-size: 13px;
+    line-height: 18px;
+    color: #77838F;
+    text-transform: capitalize;
+}
+
+.battery-det .nmbplate {
+    font-size: 12px;
+    line-height: 13px;
+    color: #151522;
+    text-transform: capitalize;
+}
+
+.batteryimg {
+    width: 90px;
+    max-width: 90px;
+    height: 70px;
+    max-height: 70px;
+}
+
+.batteryimg img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center center;
+}
+
+.recomlabel {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    right: -3px;
+    background: #34C759;
+    box-shadow: 0px 2px 7px rgba(52, 199, 89, 0.24);
+    border-radius: 4px;
+    padding: 5px;
+    z-index: 1000;
+}
+
+.recomlabel p {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 120%;
+    color: #FFFFFF;
+}
+
+.recomlabel p ion-icon {
+    margin-right: 3px;
+}
+
+.batbtns {
+    padding: 20px 15px;
+    background: #ffffff;
+    z-index: 501;
+}
+
+.afterinput {
+    background: #fff;
+    border: 1px solid #EBEBEB;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    // box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.05), 0px 0px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    margin: 12px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #A6A6A6;
+}
+
+.afterinput ion-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.conftxt {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding-right: 5px;
+    color: #1D262C;
+}
+
+.conftxt ion-icon {
+    padding-right: 5px;
+}
+
+.conftxtdet .contitle {
+    font-size: 14px;
+    color: #1D262C;
+    line-height: 125%;
+}
+
+.conftxtdet .platenumber {
+    font-size: 12px;
+    color: #7D7987;
+    line-height: 125%;
+}
+
+// CONFIRM REQUEST PAGE
+.vehiclepage-head {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+.confirmations-mapover {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 59, 87, 0.75);
+    top: 0;
+    position: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    transition: opacity 500ms ease-in-out;
+}
+
+.confirmations {
+    position: fixed;
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    top: 75px;
+    z-index: 5;
+}
+
+.confirmations input {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 5px 20px;
+    line-height: 120%;
+    border-color: #FFFFFF;
+    border: 1px solid#FFFFFF;
+    height: 48px;
+    min-height: 48px;
+    font-size: 14px;
+    color: #7D7987;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.confirmbnt {
+    margin: 25px 0px 15px 0px;
+    background: rgba(255, 255, 255, 1);
+    z-index: 505;
+    padding: 20px 15px;
+    position: fixed;
+    bottom: 0px;
+    max-height: 65%;
+    overflow-y: auto;
+    width: 100%;
+}
+
+
+/* SUCESS */
+
+.sucess {
+    padding: 10px 24px;
+}
+
+.center h1 {
+    font-family: Source Sans Pro;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 34px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    text-align: center;
+    justify-content: center;
+    padding: 0px 0px 11px 0px;
+}
+
+.center p {
+    font-family: Source Sans Pro;
+    font-weight: 00;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    color: #000000;
+}
+
+.sucess img {
+    display: block;
+    margin: 30px auto;
+    width: 100%;
+}
+
+.sub-btn {
+    margin: 10px 16px;
+}
+
+// ORDER  PAGE
+.menupills {
+    margin: 16px 15px;
+}
+
+.menupills a {
+    background: #222222;
+    border-radius: 50px;
+    transition-duration: 0.4s;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    padding: 6px 12px;
+    text-decoration: none;
+    margin-right: 4px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.ordercard {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    padding: 19px 18px;
+    margin: 18px 17px;
+}
+
+.ordercard .orderhead {
+    // align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+
+.orderdate {
+    font-size: 14px;
+    line-height: 20px;
+    color: #9B9B9B;
+    white-space: nowrap;
+}
+
+.orderhead h3 {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    color: #222222;
+    padding-bottom: 15px;
+}
+
+.orderdetails {
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-transform: capitalize;
+}
+
+.orderdetails p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #222222;
+    padding-bottom: 2px;
+}
+
+.orderdetails p span {
+    font-weight: 700;
+    color: #9B9B9B;
+}
+
+.ordertr {
+    border-radius: 28px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #222222;
+    display: inline-block;
+    border: 1px solid #222222;
+    text-align: center;
+    padding: 6px 25px;
+}
+
+orderhead .reject {
+    color: #FF3A44;
+}
+
+orderhead .active {
+    color: #34C759;
+}
+
+orderhead .pending {
+    color: #EFA41F;
+}
+
+//  ORDER DETAILS PAGE
+.main_content_div {
+    padding: 16px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.90);
+    ion-label {
+        display: block;
+    }
+    .driver_detail {
+        padding: 10px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .user_image {
+            height: 50px;
+            width: 50px;
+            min-width: 50px;
+            border-radius: 10px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin-right: 10px;
+        }
+        .name_lbl {
+            font-family: "semi-bold";
+            font-size: 16px;
+        }
+        .time_lbl {
+            color: grey;
+            font-size: 14px;
+            font-family: "medium";
+        }
+        .full_btn {
+            --border-radius: 10px;
+            margin: 0;
+        }
+    }
+}
+
+.upper_div {
+    height: 75vh;
+    padding: 0px;
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// .orderdetails-card {
+//   margin: 10px 17px;
+// }
+// .order-card {
+//   background   : #FFFFFF;
+//   box-shadow   : 0px 1px 24px rgba(0, 0, 0, 0.12);
+//   border-radius: 8px;
+//   padding      : 19px 18px;
+//   margin-top   : 20px;
+// }
+// .orderdetails-card .title {
+//   font-family: Source Sans Pro;
+//   font-weight: 600;
+//   font-size  : 16px;
+//   line-height: 16px;
+//   color      : #222222;
+//   padding    : 26px 16px 0px 0px;
+// }
+// .order-details h1 {
+//   padding-bottom: 4px;
+// }
+// .card-details h1 {
+//   font-family: Source Sans Pro;
+//   font-weight: 600;
+//   font-size  : 16px;
+//   line-height: 22px;
+//   color: #151522;
+// }
+// .card-details h2 {
+//   font-family   : Source Sans Pro;
+//   font-weight   : normal;
+//   font-size     : 11px;
+//   line-height   : 13px;
+//   color         : #151522;
+//   padding-top   : 7px;
+//   padding-bottom: 4px;
+// }
+// .card-details h3 {
+//   font-family: Source Sans Pro;
+//   font-weight: normal;
+//   font-size  : 11px;
+//   line-height: 13px;
+//   color      : #151522;
+// }
+ion-badge {
+    font-size: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 1.5;
+}
+
+.details-btn {
+    padding: 30px 25px;
+}
+
+ion-picker .picker-wrapper {
+    --background: #f5f5f5;
+    color: #6e6e71;
+}
+
+ion-picker .picker-opt {
+    color: #6e6e71;
+}
+
+ion-picker .picker-opt.picker-opt-selected {
+    color: #EFA41F;
+    font-size: 18px;
+    border: 1px solid #EFA41F;
+}
+
+ion-picker .picker-toolbar {
+    height: 60px !important;
+    border-bottom: 1px solid #e1e1e1;
+    padding-top: 8px !important;
+    background: #ffffff !important;
+}
+
+ion-picker button.picker-button {
+    background: #EFA41F !important;
+    border-radius: 5px;
+    font-size: 15px !important;
+    margin-right: 15px !important;
+    height: 38px !important;
+    color: #fff !important;
+}
+
+.booking-card h3 {
+    color: #003C57;
+}
+
+.gmnoprint[role="menubar"] {
+    bottom: 0 !important;
+    top: auto !important;
+}
+
+.gmnoprint[role="menubar"] button {
+    font-size: 15px !important;
+}
+
+.gmnoprint[role="menubar"] button ul {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+.alert-head {
+    background: #003C57;
+    color: #ffffff;
+    padding-top: 13px !important;
+    margin-bottom: 10px;
+}
+
+.alert-title {
+    color: #ffffff !important;
+    font-family: Source Sans Pro;
+}
+
+.alert-wrapper,
+ion-select {
+    --text-transform: capitalize !important;
+}
+
+.alert-button-group .alert-button {
+    border: 1px solid #EFA41F;
+    padding: 7px 18px;
+}
+
+button.alert-button {
+    background: #EFA41F;
+    color: #ffffff;
+}
+
+.alert-radio-label {
+    text-transform: capitalize !important;
+}
+
+alert-radio-group,
+.alert-checkbox-group {
+    border-top: 0px solid var(--ion-color-step-150, #d9d9d9) !important;
+}
+
+// stock page
+.batnmbrs {
+    font-family: Source Sans Pro;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 26px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.batnmbrs span {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.stockcard {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    padding: 19px 18px;
+    margin: 18px 17px;
+}
+
+.stockcard .stockdetails {
+    display: flex;
+    justify-content: space-between;
+    text-transform: capitalize;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.stockcard .stockdetails h4 {
+    font-weight: 500;
+    text-align: right;
+    font-size: 18px;
+}
+
+.stockcard .stockhead {
+    font-family: Source Sans Pro;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="select"],
+input[type="number"] {
+    color: #1E2022;
+}

@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border" collapse="fade" [translucent]="true">
+  <ion-toolbar>
+    <ion-button (click)="dismiss()" fill="clear" color="light" slot="start">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="markvoidpage">
+    <section>
+      <form class="form" id="registerForm" name="registerForm" (ngSubmit)="f.form.valid && jobAction()" #f="ngForm"
+        novalidate>
+        <h2>Why are you rejecting this job?</h2>
+        <p>Reason for rejection text should have at least have 10 characters in it.</p>
+        <textarea rows="5" maxLength="500" minlength="10" name="comment" form="usrform" [(ngModel)]="reason"
+          name="reason" #reas="ngModel" class="txtare" [ngClass]="{ 'is-invalid': f.submitted && reas.invalid }"
+          required>Enter text here...</textarea>
+        <div *ngIf="f.submitted && reas.invalid" class="error">
+
+          <ion-label *ngIf="reas.errors.required">
+            Please enter reason
+          </ion-label>
+          <ion-label *ngIf="reas.errors?.minlength">
+            Reason must be 10 characters long
+          </ion-label>
+        </div>
+
+        <div class="confirm-btn">
+          <ion-button size="large" type="submit" color="primary" expand="block">Submit Reason</ion-button>
+        </div>
+      </form>
+    </section>
+
+  </div>
+</ion-content>

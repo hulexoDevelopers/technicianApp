@@ -1,0 +1,84 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title size="medium" class="ion-margin-left">
+            Stock Summery
+        </ion-title>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="container">
+        <ion-text color="primary" class="pageheading">
+            <h4 class="pageheading">Stock assigned to you!</h4>
+        </ion-text>
+        <section class="menupills">
+            <a href="javascript:void(0)" (click)="stockType = 'battery'">Batteries</a>
+            <a href="javascript:void(0)" (click)="stockType = 'oil'">Oil</a>
+            <a href="javascript:void(0)" (click)="stockType = 'tyre'">Tires</a>
+        </section>
+        <section *ngIf="stockType == 'battery'">
+     
+            <div class="stockcard" *ngFor="let item of batteryStock">
+                <h3 class="stockhead">{{resourceService.getBatteryNameById(item._id)}}</h3>
+                <div class="stockdetails">
+                    <h4>Assigned: </h4>
+                    <h4> {{item.totalAssign}}</h4>
+                </div>
+                <div class="stockdetails">
+                    <h4>Sold Out: </h4>
+                    <h4>{{item.totalSale}}</h4>
+                </div>
+                <div class="stockdetails">
+                    <h4>Available: </h4>
+                    <h4>{{item.totalAssign - item.totalSale}}</h4>
+                </div>
+            </div>
+        </section>
+
+
+        <section *ngIf="stockType == 'oil'">
+
+            <div class="stockcard" *ngFor="let item of oilStock">
+                <h3 class="stockhead">{{resourceService.getOilNameById(item._id)}}</h3>
+
+                <div class="stockdetails">
+                    <h4>Assigned: </h4>
+                    <h4> {{item.totalAssign}}</h4>
+                </div>
+                <div class="stockdetails">
+                    <h4>Sold Out: </h4>
+                    <h4>{{item.totalSale}}</h4>
+                </div>
+                <div class="stockdetails">
+                    <h4>Available: </h4>
+                    <h4>{{item.totalAssign - item.totalSale}}</h4>
+                </div>
+
+            </div>
+        </section>
+
+        <section *ngIf="stockType == 'tyre'">
+     
+            <div class="stockcard" *ngFor="let item of tyreStock">
+                <h3 class="stockhead">{{resourceService.getTyreNameById(item._id)}}</h3>
+
+                <div class="stockdetails">
+                    <h4>Assigned: </h4>
+                    <h4> {{item.totalAssign}}</h4>
+                </div>
+                <div class="stockdetails">
+                    <h4>Sold Out: </h4>
+                    <h4>{{item.totalSale}}</h4>
+                </div>
+                <div class="stockdetails">
+                    <h4>Available: </h4>
+                    <h4>{{item.totalAssign - item.totalSale}}</h4>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</ion-content>

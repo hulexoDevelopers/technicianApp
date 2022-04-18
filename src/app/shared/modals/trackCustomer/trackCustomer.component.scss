@@ -1,0 +1,24 @@
+
+.active-status {
+  background-color: #2aa952;
+  color: #fff !important;
+}
+.danger-active-status {
+  background-color: red;
+  color: #fff !important;
+  border: 1px solid red
+}
+
+.mapbox {
+  width: 100%;
+  padding: 0;
+}
+agm-map {
+  width: 100%;
+  height: 90vh;
+  border: 0px solid red;
+}
+
+.footercont {
+  padding: 20px 20px;
+}

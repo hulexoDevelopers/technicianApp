@@ -1,0 +1,25 @@
+ion-toolbar {
+  --background: linear-gradient(245.35deg, #336379 -28.33%, #003C57 84.14%);
+  --color     : var(--ion-color-light);
+}
+
+ion-header {
+  &.header-md:after {
+    background: none;
+  }
+}
+.markvoidpage {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.txtare {
+  width: calc(100% - 10px);
+  border: 1px solid #d9d9d9;
+  border-radius: 0;
+  background: transparent;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

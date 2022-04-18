@@ -1,0 +1,9 @@
+{
+	"appId": "technician.batt.app",
+	"appName": "Technician",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"server": {
+		"cleartext": true
+	}
+}

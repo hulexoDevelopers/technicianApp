@@ -1,0 +1,208 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/orders"></ion-back-button>
+        </ion-buttons>
+        <ion-title size="medium" *ngIf="orderDetail">
+            Job No. - {{orderDetail.inquiryId}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="orderspage" *ngIf="orderDetail">
+        <div class="detstatus">
+            <p class="ordrstatus">
+                <!-- <ion-badge color="light">{{jobDetail.status}}</ion-badge> -->
+                <ion-button shape="round" size="small" disabled fill="solid">{{jobDetail.status}}</ion-button>
+            </p>
+            <section class="" *ngIf="jobDetail.status == 'pending'">
+                <ion-buttons>
+                    <ion-button size="small" (click)="activateJob()" fill="solid" color="success">Accept Job
+                    </ion-button>
+                    <ion-button size="small" (click)="markOrderVoid()" fill="solid" expand="block" color="danger">Reject
+                        Job
+                    </ion-button>
+                </ion-buttons>
+            </section>
+        </div>
+        <section class="booking-card">
+            <h3 class="ordrtitle">Customer Details</h3>
+            <div class="ordercard">
+                <div class="orderhead">
+                    <div class="cuscarddet">
+                        <h5>{{orderDetail.personalInfo.firstName}} {{orderDetail.personalInfo.lastName}}</h5>
+                        <h6>Contact: {{orderDetail.contactNo}}</h6>
+                        <p>{{orderDetail.address[0].address}}</p>
+                    </div>
+                    <p class="orderdate">{{orderDetail.created_at | date}}</p>
+                </div>
+                <div class="trackdip">
+                    <a *ngIf="jobDetail.status == 'pending' || jobDetail.status == 'active'" href="javascript:void(0)"
+                        (click)='startCustomerTracking()'>
+                        <img src="assets/img/tracking-icon.svg" alt="">
+                        <span>Start Driving</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="booking-card" *ngIf="isVehicle">
+            <h3 class="ordrtitle">Car Details</h3>
+            <div class="ordercard">
+                <div class="orderhead">
+                    <div class="cuscarddet">
+                        <p class="vehrand"> {{vehicle.detail.title}}</p>
+                        <h5>{{vehicle.title}}</h5>
+                        <!-- <p class="nmbplate">AH92103</p> -->
+                    </div>
+                    <div class="vehicimg">
+                        <img [src]="vehicle.imageUrl" alt="vehicle-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="booking-card" *ngIf="isBattery">
+            <h3 class="ordrtitle">Battery Details</h3>
+            <div class="ordercard">
+                <div class="orderhead">
+                    <p class="battery-img"><img src="assets/img/battery.png" alt="battery"> </p>
+                    <div class="cuscarddet">
+                        <h5>{{battery.title}}</h5>
+                        <p class="vehrand">{{battery.detail.title}}</p>
+                        <p class="vehrand">Warranty: {{battery.warranty}}</p>
+                        <p *ngIf="isBatteryStock"> Stock: {{getTechTotalStock(userData._id)}}
+                        </p>
+                        <!-- <p class=" nmbplate">AH92103</p> -->
+                        <p *ngIf="jobDetail.status == 'pending' || jobDetail.status == 'active'"><a class="choobtn"
+                                (click)="otherbattery()">Choose Other</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="booking-card" *ngIf="isTyre">
+            <h3 class="ordrtitle">Tire Details</h3>
+            <div class="ordercard">
+                <div class="orderhead">
+                    <!-- <p class="battery-img"><img src="assets/img/battery.png" alt="battery"> </p> -->
+                    <div class="cuscarddet">
+                        <h5>{{tyre.title}}</h5>
+                        <p class="vehrand">{{tyre.detail.title}}</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="booking-card" *ngIf="isOil">
+            <h3 class="ordrtitle">Oil Details</h3>
+            <div class="ordercard">
+                <div class="orderhead">
+                    <div class="cuscarddet">
+                        <p class="vehrand"> {{oil.title}}</p>
+                        <h5>{{oil.detail.title}}</h5>
+                        <!-- <p class="nmbplate">AH92103</p> -->
+                    </div>
+                    <!-- <div class="vehicimg">
+                        <img [src]="vehicle.imageUrl" alt="vehicle-img">
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <section class="booking-card">
+            <h3 class="ordrtitle">Inquiry Information</h3>
+            <div class="ordercard">
+                <div class="orderhead">
+                    <!-- <p class="battery-img"><img src="assets/img/battery.png" alt="battery"> </p> -->
+                    <div class="cuscarddet">
+                        <h5>Remarks</h5>
+                        <p class="vehrand">{{orderDetail?.remarks}}</p>
+                        <h5>Inquiry Detail</h5>
+                        <p class="vehrand">{{orderDetail?.inquiryDetail}}</p>
+                        <h5>Notes</h5>
+                        <p class="vehrand">{{orderDetail?.inquiryNote}}</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <form *ngIf="jobDetail.status == 'pending' ||  jobDetail.status == 'active'" class="form" id="registerForm"
+            name="registerForm" (ngSubmit)="f.form.valid && confirmJobRequest()" #f="ngForm" novalidate>
+            <section class="input-details">
+                <h3 class="ordrtitle">Input Total (VAT Exclusive)</h3>
+                <div class="price ion-margin-top">
+                    <ion-item>
+                        <ion-label>Price (AED)</ion-label>
+                        <input type="number" [(ngModel)]="price" name="pricee" #pr="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && pr.invalid }" required>
+                    </ion-item>
+                    <div *ngIf="f.submitted && pr.invalid" class="error">
+                        <ion-label *ngIf="pr.errors.required">Price is required</ion-label>
+                    </div>
+                </div>
+            </section>
+            <section class=" input-details">
+                <!-- <h1 class="title">Payment Method</h1> -->
+                <div class="search-botom">
+                    <div id="input-container">
+                        <ion-item class="box">
+                            <ion-label color="dark">Payment Method</ion-label>
+                            <ion-select placeholder="Select Method" [(ngModel)]="paymentType" #pType="ngModel"
+                                name="type" [ngClass]="{ 'is-invalid': f.submitted && pType.invalid }" required>
+                                <ion-select-option *ngFor="let type of paymentTypes" [value]="type">{{type}}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+
+                        <div class="price ion-margin-top" *ngIf="paymentType == 'card'">
+                            <ion-item>
+                                <ion-label>Enter last 4 digit of card</ion-label>
+                                <input type="number"
+                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    [(ngModel)]="paymentCard" name="card" #card="ngModel" [pattern]="unamePattern"
+                                    maxlength="4" [ngClass]="{ 'is-invalid': f.submitted && card.invalid }" required>
+                            </ion-item>
+                            <div *ngIf="f.submitted && card.invalid" class="error">
+                                <ion-label *ngIf="card.errors.required">Invalid Card</ion-label>
+                                <ion-label *ngIf="card.errors.pattern">Only numeric are allowed</ion-label>
+                            </div>
+                        </div>
+
+                        <ion-item *ngIf="isBattery">
+                            <ion-label>Install New Battery?</ion-label>
+                            <ion-toggle color="success" [(ngModel)]="isNewBattery" name="isBattery"></ion-toggle>
+                        </ion-item>
+                        <ion-item *ngIf="isTyre">
+                            <ion-label>Install New Tire?</ion-label>
+                            <ion-toggle color="success" [(ngModel)]="isNewTyre" name="isTyre"></ion-toggle>
+                        </ion-item>
+                        <ion-item *ngIf="isOil">
+                            <ion-label>Install New Oil?</ion-label>
+                            <ion-toggle color="success" [(ngModel)]="isNewOil" name="isOil"></ion-toggle>
+                        </ion-item>
+                        <ion-item *ngIf="isBattery">
+                            <ion-label>Scrap Battery?</ion-label>
+                            <ion-toggle color="success" [(ngModel)]="scrapbattery" name="isScrapBattery"></ion-toggle>
+                            <!-- <ion-checkbox slot="end" [(ngModel)]="scrapbattery" name="isScrapBattery"></ion-checkbox> -->
+                        </ion-item>
+                    </div>
+                </div>
+            </section>
+            <div class="confirm-btn" *ngIf="jobDetail.status == 'active'">
+                <!-- <button [disabled]='isDisabled' class="btn">Confirm</button> -->
+                <ion-button size="large" type="submit" color="success" expand="block">Complete Job</ion-button>
+                <ion-button size="large" (click)="markOrderVoid()" color="danger" expand="block">Customer Rejected
+                </ion-button>
+
+            </div>
+        </form>
+    </div>
+</ion-content>

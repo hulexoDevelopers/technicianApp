@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button fill="clear" (click)="dismiss()" slot="start">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title size="small" slot="" class="ion-text-center">
+      Add Address Detail
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="headerpopup">
+  <div class="container">
+    <section class="sucess">
+      <img src="assets/img/Mail sent-bro 12.png" alt="">
+      <div class="center" *ngIf="lat">
+        <p> Do you want to start <br> accepting orders ?</p>
+        <!-- <p>Previous Lat: {{this.lastLat}}</p>
+        <p>Previous Long: {{this.lastLong}}</p>
+        <p>Current Lat: {{this.lat}}</p>
+        <p>Current Long: {{this.lng}}</p>
+        <p>Distance: {{this.distance}}</p> -->
+      </div>
+    </section>
+    <div class="pop-btn sucess" *ngIf="isLoad">
+      <div class="details-btn">
+        <a (click)="changeStatus(true)" class="detailbtn"
+          [ngClass]="isActive  === true ? 'detailbtn ' + ' active-status' : ''">Yes</a>
+      </div>
+      <div class="details-btn">
+        <a (click)="changeStatus(false)" class="detailbtn"
+          [ngClass]="isActive  === false ? 'detailbtn ' + ' danger-active-status' : ''">No</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

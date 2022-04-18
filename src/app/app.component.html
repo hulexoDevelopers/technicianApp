@@ -1,0 +1,43 @@
+<ion-app>
+  <ion-menu side="start" class="mainmenu">
+    <ion-content>
+      <section class="userprof">
+        <div class="useravatar">
+          <ion-icon src="/assets/img/technician.svg" slot="start" color="light"></ion-icon>
+        </div>
+        <ion-text *ngIf="isLoggedin && user">
+          <h5>Welcome {{user.firstName}}</h5>
+        </ion-text>
+      </section>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/dashboard">
+            <ion-icon src="/assets/img/right-arrow.svg" slot="start"></ion-icon>
+            <ion-label class="ion-padding-horizontal">Dashboard</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/orders">
+            <ion-icon src="/assets/img/right-arrow.svg" slot="start"></ion-icon>
+            <ion-label class="ion-padding-horizontal">My Jobs</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/stock">
+            <ion-icon src="/assets/img/right-arrow.svg" slot="start"></ion-icon>
+            <ion-label class="ion-padding-horizontal">My Stock</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item lines="none" button (click)="logout()">
+            <ion-icon src="/assets/img/logout.svg" slot="start"></ion-icon>
+            <ion-label class="ion-padding-horizontal">Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>
