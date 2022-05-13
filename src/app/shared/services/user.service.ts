@@ -70,6 +70,15 @@ export class userService {
       )
   }
 
+  //update user location
+  updateUserLocation(id, data) {
+    return this._api.put(`${"users/updateLocation/" + id}`, data)
+      .pipe(
+        map((res: any) => res),
+        catchError((error: any) => error)
+      )
+  }
+
   //update technician active status
   updateActiveStatus(id, data) {
     return this._api.put(`${"users/updateActiveStatus/" + id}`, data)

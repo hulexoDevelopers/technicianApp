@@ -44,7 +44,7 @@
     "@ionic-native/location-accuracy": "^5.36.0",
     "@ionic-native/native-geocoder": "^5.36.0",
     "@ionic-native/stripe": "^5.36.0",
-    "@ionic/angular": "^5.5.2",
+    "@ionic/angular": "^6.1.2",
     "@ionic/storage-angular": "^3.0.6",
     "agm-direction": "^0.8.10",
     "cordova-plugin-android-permissions": "^1.1.3",

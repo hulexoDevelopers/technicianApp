@@ -54,8 +54,8 @@ export class DashboardPage implements OnInit {
 
 
   myChange(ev) {
+    console.log('change method call')
     if (this.isActive == true) {
-      console.log('getting value' + this.isActive)
       this.geoLocationService.getUserByIdAndUpdateLocation(this.data.UserAuthData._id);
     }
     this.updateUserActiveStatus(this.isActive)
@@ -153,6 +153,9 @@ export class DashboardPage implements OnInit {
     let data = {
       status: status
     }
+    console.log('user id' + this.userData._id);
+    console.log('data' + JSON.stringify(data));
+
     this.userService.updateActiveStatus(this.userData._id, data).subscribe(res => {
       this.checkAndCloseLoader();
       console.log('res of update' + JSON.stringify(res))

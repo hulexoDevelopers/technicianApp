@@ -7,12 +7,12 @@
             Dashboard
         </ion-title>
         <ion-buttons slot="end">
-            <ion-toggle color="success" *ngIf="isLoad" [(ngModel)]="isActive" (ionChange)="myChange($event)"></ion-toggle>
+            <ion-toggle color="success" *ngIf="isLoad" [(ngModel)]="isActive" (ionChange)="myChange($event)">
+            </ion-toggle>
             <ion-button>
                 <ion-badge *ngIf="isActive && isLoad" color="success" slot="end">Online</ion-badge>
                 <ion-badge *ngIf="!isActive && isLoad" color="danger" slot="end">Offline
                 </ion-badge>
-                <!-- <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon> -->
             </ion-button>
         </ion-buttons>
     </ion-toolbar>

@@ -78,7 +78,6 @@ export class geoLocationService {
             if (res.success) {
                 this.userData = res.data;
                 this.isActive = res.data.activeStatus;
-                // this.DataService.loggedUser = res.data;
                 if (this.userData.data.length > 0) {
                     if (this.userData.data[0].lat) {
                         this.lastLat = this.userData.data[0].lat;
@@ -345,12 +344,15 @@ export class geoLocationService {
 
 
     updateMyLocation() {
-        this.userService.updateUser(this.userData._id, this.userData).subscribe(res => {
+        this.userService.updateUserLocation(this.userData._id, this.userData).subscribe(res => {
+            console.log('res  ' + JSON.stringify(res))
             if (res.success) {
                 console.log('user data is updated' + this.lat + this.lng)
                 // this.getMyLocation();
                 // this.dismiss(true)
             }
+        }, error => {
+            console.log('err ' + error)
         })
     }
 

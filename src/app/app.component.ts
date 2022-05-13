@@ -66,10 +66,13 @@ export class AppComponent {
     this.saveSharedDataFromStorage() //if page refresh save default data;
   }
 
+  
+
   ionViewWillEnter() {
     this.initializeApp(); //initialize app for local notifications
     this.backButtonEvent(); // Initialize BackButton Eevent.
     this.saveSharedDataFromStorage() //if page refresh save default data;
+    
   }
 
 
@@ -107,14 +110,6 @@ export class AppComponent {
 
 
   async ngOnInit() {
-    this.loadScript("https://unpkg.com/tesseract.js@2.1.5/dist/tesseract.min.js");
-    
-
-    // cordova.plugins.diagnostic.isLocationEnabled(function (enabled) {
-    // alert("Location is " + (enabled ? "enabled" : "disabled"));
-    // }, function (error) {
-    //   alert("The following error occurred: " + error);
-    // });
     this.saveSharedDataFromStorage()
 
     //socet service for locaiton update job
@@ -125,6 +120,7 @@ export class AppComponent {
         if (data) {
           this.DataService.userToken = data;
           this.DataService.UserAuthData = this.DataService.getDecodedAccessToken(data);
+          console.log('updated job date' + JSON.stringify(this.updateJobData));
           if (this.DataService.UserAuthData._id == this.updateJobData.technicianId) {
             this.scheduleNotfications('Order Assigned', `Order no ${this.updateJobData.inquiryId}  Assigned to you`, this.updateJobData.inquiryId)
           }
@@ -250,7 +246,7 @@ export class AppComponent {
           {
             text: 'Okay',
             handler: () => {
-              this.router.navigate(["/orders/order-detail", this.updateJobData.inquiryId]);
+              this.router.navigate(["/orders/order-detail", this.updateJobData.orderId]);
             }
           },
         ]
