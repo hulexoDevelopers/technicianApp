@@ -173,12 +173,13 @@ export class LoginPage implements OnInit {
       role: this.data.UserAuthData.role
     }
     this.SocService.emit('addUser', userData);
+    this.getUserById();
     //check if user allow location permission
     this.geoLocationService.getUserByIdAndUpdateLocation(this.data.UserAuthData._id);
     this.router.navigate(['/dashboard'])
     // this.utilService.getUserById().then(data => {
     //   if (data) {
-       
+
     //   }
     // })
 
@@ -189,10 +190,19 @@ export class LoginPage implements OnInit {
 
 
   //get user by id
-  getUserById() {
-    // this.geoLocationService.getMyLocation();
-  }
 
+  //get user  by id 
+  getUserById() {
+    let id = this.data.UserAuthData._id;
+    let token = this.data.userToken;
+    this.userService.getUserByid(id, token).subscribe(res => {
+      if (res.success) {
+        this.user = res.data;
+        this.data.userLogData = res.data;
+      } else {
+      }
+    })
+  }
   getDecodedAccessToken(token: string): any {
     try {
       return jwt_decode(token);

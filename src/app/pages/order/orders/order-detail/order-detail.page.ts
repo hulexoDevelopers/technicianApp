@@ -234,9 +234,9 @@ export class OrderDetailPage implements OnInit {
   }
 
   async startCustomerTracking() {
-    window.location.href = `https://www.google.com/maps/dir/?api=1&destination=${this.orderDetail.address[0].lat},${this.orderDetail.address[0].long}&travelmode=driving`
+    // window.location.href = `https://www.google.com/maps/dir/?api=1&destination=${this.orderDetail.address[0].lat},${this.orderDetail.address[0].long}&travelmode=driving`
 
-    return;
+    // return;
     const modal = await this.modalCtrl.create({
       component: trackCustomerComponent,
       componentProps: { value: JSON.stringify(this.orderDetail.address) }

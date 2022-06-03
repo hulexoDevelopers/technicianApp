@@ -7,6 +7,9 @@ import { activeStatusComponent } from './../../shared/modals/activeStatus.compon
 import { utilityService } from './../../shared/services/utility.service';
 import { jobService } from './../../shared/services/job.service';
 import { geoLocationService } from './../../shared/services/geoLocation.service';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@awesome-cordova-plugins/background-geolocation/ngx';
+
+declare var window;
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +17,22 @@ import { geoLocationService } from './../../shared/services/geoLocation.service'
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+
+  locations: any;
+
+  config: BackgroundGeolocationConfig = {
+    //Both
+    desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
+    distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
+    debug: true, // <-- Enable to show visual indications when you receive a background location update
+    interval: 9000, // (Milliseconds) Requested Interval in between location updates.
+    // useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
+
+    //Android Only
+    notificationTitle: 'BG Plugin', // customize the title of the notification
+    notificationText: 'Tracking', //customize the text of the notification
+    fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
+  };
   latitude: any = 0; //latitude
   longitude: any = 0; //longitude
 
@@ -32,6 +51,9 @@ export class DashboardPage implements OnInit {
   totalPending = 0;
   totalCompleted = 0;
   totalRejected = 0;
+
+  lat = 0;
+  long = 0;
   constructor(
     private userService: userService,
     public data: DataService,
@@ -41,10 +63,52 @@ export class DashboardPage implements OnInit {
     private geoLocationService: geoLocationService,
     private loadingController: LoadingController,
     private jobService: jobService,
+    private backgroundGeolocation: BackgroundGeolocation,
     private router: Router,
   ) {
     this.userAuth = this.data.UserAuthData;
+    this.locations = [];
+    this.backgroundGeolocation.configure(this.config)
+      .then(() => {
+
+        this.backgroundGeolocation.on(BackgroundGeolocationEvents.location).subscribe((location: BackgroundGeolocationResponse) => {
+          console.log('bg - loc dashboard', location);
+
+          this.lat = location.latitude;
+          this.long = location.longitude;
+          let address = {
+            lat: this.lat,
+            long: this.long
+          };
+          if(this.userData){
+            console.log('we have user data let update location from dashboard.ts')
+            this.userData.data[0] = address;
+            this.updateMyLocation();
+          }
+        
+          // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
+          // and the background-task may be completed.  You must do this regardless if your operations are successful or not.
+          // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
+          // this.backgroundGeolocation.finish(); // FOR IOS ONLY
+        });
+
+      });
   }
+
+
+  updateMyLocation() {
+    this.userService.updateUserLocation(this.userData._id, this.userData).subscribe(res => {
+      console.log('res  ' + JSON.stringify(res))
+      if (res.success) {
+        console.log('user data is updated for dash.ts' + this.lat + this.long)
+        // this.getMyLocation();
+        // this.dismiss(true)
+      }
+    }, error => {
+      console.log('err ' + error)
+    })
+  }
+
 
   options = {
     timeout: 10000,
@@ -53,10 +117,27 @@ export class DashboardPage implements OnInit {
   };
 
 
+
+  start() {
+    console.log('bg start')
+    // this.backgroundGeolocation.start();
+    window.app.backgroundGeolocation.start()
+  }
+  stop() {
+
+    console.log('bg stop')
+    // this.backgroundGeolocation.stop();
+    window.app.backgroundGeolocation.stop()
+  }
+
   myChange(ev) {
     console.log('change method call')
     if (this.isActive == true) {
+      
       this.geoLocationService.getUserByIdAndUpdateLocation(this.data.UserAuthData._id);
+      this.start();
+    } else {
+      this.stop();
     }
     this.updateUserActiveStatus(this.isActive)
     // do stuffs
@@ -158,7 +239,6 @@ export class DashboardPage implements OnInit {
 
     this.userService.updateActiveStatus(this.userData._id, data).subscribe(res => {
       this.checkAndCloseLoader();
-      console.log('res of update' + JSON.stringify(res))
       if (res.success) {
         this.isActive = status
         this.getCurrentCoordinates();

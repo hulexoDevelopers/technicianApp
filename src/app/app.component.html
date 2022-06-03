@@ -5,9 +5,9 @@
         <div class="useravatar">
           <ion-icon src="/assets/img/technician.svg" slot="start" color="light"></ion-icon>
         </div>
-        <ion-text *ngIf="isLoggedin && user">
-          <h5>Welcome {{user.firstName}}</h5>
-        </ion-text>
+        <ion-text *ngIf="DataService.userLogData">
+          <h5>Welcome {{DataService.userLogData.firstName}}</h5>
+      </ion-text>
       </section>
       <ion-list>
         <ion-menu-toggle>

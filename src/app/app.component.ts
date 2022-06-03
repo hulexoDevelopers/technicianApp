@@ -21,8 +21,9 @@ import { utilityService } from './shared/services/utility.service';
 import { ELocalNotificationTriggerUnit, LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 import { ApiService } from './core/services/api.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@awesome-cordova-plugins/background-geolocation/ngx';
 
-
+declare var window;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -41,7 +42,7 @@ export class AppComponent {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   private _storage: Storage | null = null;
   constructor(
-    private DataService: DataService,
+    public DataService: DataService,
     private cap: capStorageService,
     private userService: userService,
     // private diagnostic: Diagnostic,
@@ -54,6 +55,7 @@ export class AppComponent {
     private ApiService: ApiService,
     // private updateLocationService: updateLocationService,
     // private autoLocationService: autoLocationService,
+    private backgroundGeolocation: BackgroundGeolocation,
     private LocalNotifications: LocalNotifications,
     private utilitService: utilityService,
     private geolocation: Geolocation,
@@ -66,13 +68,13 @@ export class AppComponent {
     this.saveSharedDataFromStorage() //if page refresh save default data;
   }
 
-  
+
 
   ionViewWillEnter() {
     this.initializeApp(); //initialize app for local notifications
     this.backButtonEvent(); // Initialize BackButton Eevent.
     this.saveSharedDataFromStorage() //if page refresh save default data;
-    
+
   }
 
 
@@ -83,6 +85,47 @@ export class AppComponent {
   //initialize app for local notifications
   initializeApp() {
     this.platform.ready().then(() => {
+      const config: BackgroundGeolocationConfig = {
+         //Both
+    desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
+    distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
+    debug: true, // <-- Enable to show visual indications when you receive a background location update
+    interval: 9000, // (Milliseconds) Requested Interval in between location updates.
+    // useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
+    
+    //Android Only
+    notificationTitle: 'We track your location,', // customize the title of the notification
+    notificationText: 'Tracking', //customize the text of the notification
+    fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
+      };
+
+      this.backgroundGeolocation.configure(config)
+        .then(() => {
+
+          this.backgroundGeolocation.on(BackgroundGeolocationEvents.location)
+            .subscribe((location: BackgroundGeolocationResponse) => {
+              console.log('bg - loc main', location);
+              this.lat = location.latitude;
+              this.long = location.longitude;
+              let address = {
+                lat: this.lat,
+                long: this.long
+              };
+              if(this.userData){
+                console.log('we have user data let update location from app.ts')
+                this.userData.data[0] = address;
+                this.updateMyLocation();
+              }
+              // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
+              // and the background-task may be completed.  You must do this regardless if your operations are successful or not.
+              // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
+              // this.backgroundGeolocation.finish(); // FOR IOS ONLY
+            });
+
+        });
+
+      window.app = this;
+
       this.LocalNotifications.on('click').subscribe(res => {
         let msg = res.data ? res.data.myData : '';
         this.showAlert(res.title, res.text, msg)
@@ -97,8 +140,20 @@ export class AppComponent {
     });
   }
 
-
-
+lat =0;
+long = 0;
+  updateMyLocation() {
+    this.userService.updateUserLocation(this.userData._id, this.userData).subscribe(res => {
+      console.log('res  ' + JSON.stringify(res))
+      if (res.success) {
+        console.log('user data is updated from app.ts' + this.lat + this.long)
+        // this.getMyLocation();
+        // this.dismiss(true)
+      }
+    }, error => {
+      console.log('err ' + error)
+    })
+  }
 
 
   public loadScript(url) {
@@ -130,45 +185,45 @@ export class AppComponent {
     })
 
 
-    setInterval(function () {
-      this.platform.ready().then(() => {
-        if (!this.DataService.userToken) {
-          return;
-        }
-        this.geolocation.getCurrentPosition().then((resp) => {
-          resp.coords.latitude;
-          resp.coords.longitude;
+    // setInterval(function () {
+    //   this.platform.ready().then(() => {
+    //     if (!this.DataService.userToken) {
+    //       return;
+    //     }
+    //     this.geolocation.getCurrentPosition().then((resp) => {
+    //       resp.coords.latitude;
+    //       resp.coords.longitude;
 
-          this.lat = resp.coords.latitude;
-          this.lng = resp.coords.longitude;
-          this.lastLat = resp.coords.latitude;
-          this.lastLong = resp.coords.longitude;
-          if (this.lat, this.lng) {
-            let address = {
-              lat: this.lat,
-              long: this.lng
-            }
-            if (this.userData.data.length > 0) {
-              this.userData.data[0] = address;
-            } else {
-              this.userData.data = [];
-              this.userData.data.push(address)
-            }
-          }
-          this.userService.updateUser(this.userData._id, this.userData).subscribe(res => {
-            if (res.success) {
-              console.log('user data is updated' + this.lat + this.lng)
-              // this.getMyLocation();
-              // this.dismiss(true)
-            }
-          })
-        }).catch((error) => {
-          console.log('Error getting location', error);
-        });
+    //       this.lat = resp.coords.latitude;
+    //       this.lng = resp.coords.longitude;
+    //       this.lastLat = resp.coords.latitude;
+    //       this.lastLong = resp.coords.longitude;
+    //       if (this.lat, this.lng) {
+    //         let address = {
+    //           lat: this.lat,
+    //           long: this.lng
+    //         }
+    //         if (this.userData.data.length > 0) {
+    //           this.userData.data[0] = address;
+    //         } else {
+    //           this.userData.data = [];
+    //           this.userData.data.push(address)
+    //         }
+    //       }
+    //       this.userService.updateUser(this.userData._id, this.userData).subscribe(res => {
+    //         if (res.success) {
+    //           console.log('user data is updated' + this.lat + this.lng)
+    //           // this.getMyLocation();
+    //           // this.dismiss(true)
+    //         }
+    //       })
+    //     }).catch((error) => {
+    //       console.log('Error getting location', error);
+    //     });
 
 
-      })
-    }, 20000);
+    //   })
+    // }, 20000);
 
 
 
@@ -313,13 +368,15 @@ export class AppComponent {
   logout() {
     this.cap.removeName('authTokk');
     this.utilitService.logoutUser().then(data => {
+      
       if (data) {
         this.router.navigate(['/login'], { replaceUrl: true });
+        window.app.backgroundGeolocation.stop()
       }
     })
 
     this.router.navigate(['/login'], { replaceUrl: true });
-
+    window.app.backgroundGeolocation.stop()
   }
 
   user;
@@ -331,11 +388,11 @@ export class AppComponent {
     this.userService.getUserByid(id, token).subscribe(res => {
       if (res.success) {
         this.user = res.data;
+        this.DataService.userLogData = res.data;
         this.isLoggedin = true;
       } else {
         this.user = ''
         this.isLoggedin = false;
-        // this.data.goBack();
       }
     })
   }

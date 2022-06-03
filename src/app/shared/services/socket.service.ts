@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SocService {
-  private socket = io.connect('http://157.245.216.126:4000');
+  private socket = io.connect('https://batteryreplacementdubai.com:4000');
   constructor() {
     //   this.socket=io('http://localhost:3300');
   }

@@ -169,7 +169,7 @@ export class geoLocationService {
                     lat: this.lat,
                     long: this.lng
                 }
-                if (this.userData.data.length > 0) {
+                if (this.userData && this.userData.data.length > 0) {
                     this.userData.data[0] = address;
                 } else {
                     this.userData.data = [];
@@ -244,8 +244,9 @@ export class geoLocationService {
 
     async watchPosition() {
         try {
-            let watch = this.geolocation.watchPosition();
-            watch.subscribe((data: any) => {
+            let watch = this.geolocation.getCurrentPosition();
+            watch.then((data: any) => {
+                console.log('watch subscribe')
                 this.ngZone.run(async () => {
 
                     this.lat = data.coords.latitude;
@@ -272,18 +273,19 @@ export class geoLocationService {
 
 
                         // 0.5 meter away
+                        console.log('checking distant')
 
                         if (distance > 0.1) {
-                            console.log('distance is greater than 0.1 p;ease update my location')
-                            this.lastLat = data.coords.latitude;
-                            this.lastLong = data.coords.longitude;
-                            if (this.userData.data.length > 0) {
-                                this.userData.data[0] = address;
-                            } else {
-                                this.userData.data.push(address)
-                            }
-                            this.userData.log.push(new Date())
-                            this.updateMyLocation();
+                        console.log('distance is greater than 0.1 p;ease update my location')
+                        this.lastLat = data.coords.latitude;
+                        this.lastLong = data.coords.longitude;
+                        if (this.userData.data.length > 0) {
+                            this.userData.data[0] = address;
+                        } else {
+                            this.userData.data.push(address)
+                        }
+                        // this.userData.log.push(new Date())
+                        this.updateMyLocation();
 
                         }
                     }
