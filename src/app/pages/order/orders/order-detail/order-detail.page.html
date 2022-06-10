@@ -13,7 +13,6 @@
     <div class="orderspage" *ngIf="orderDetail">
         <div class="detstatus">
             <p class="ordrstatus">
-                <!-- <ion-badge color="light">{{jobDetail.status}}</ion-badge> -->
                 <ion-button shape="round" size="small" disabled fill="solid">{{jobDetail.status}}</ion-button>
             </p>
             <section class="" *ngIf="jobDetail.status == 'pending'">
@@ -57,7 +56,7 @@
                         <!-- <p class="nmbplate">AH92103</p> -->
                     </div>
                     <div class="vehicimg">
-                        <img [src]="vehicle.imageUrl" alt="vehicle-img">
+                        <img [src]="vehicle.detail.imageUrl" alt="vehicle-img">
                     </div>
                 </div>
             </div>

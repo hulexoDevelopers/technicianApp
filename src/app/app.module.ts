@@ -15,6 +15,7 @@ import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { AgmCoreModule } from '@agm/core';
 import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
+import { interceptorProviders } from './interceptor.module';
 
 // import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 @NgModule({
@@ -35,7 +36,8 @@ import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications
     AppRoutingModule,
 
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Stripe
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Stripe,
+    interceptorProviders,
     , {
     provide: APP_INITIALIZER,
     useFactory: resourceProviderFactory,

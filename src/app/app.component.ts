@@ -86,17 +86,14 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       const config: BackgroundGeolocationConfig = {
-         //Both
-    desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
-    distanceFilter: 5, // (Meters) How far you must move from the last point to trigger a location update
-    debug: true, // <-- Enable to show visual indications when you receive a background location update
-    interval: 9000, // (Milliseconds) Requested Interval in between location updates.
-    // useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
-    
-    //Android Only
-    notificationTitle: 'We track your location,', // customize the title of the notification
-    notificationText: 'Tracking', //customize the text of the notification
-    fastestInterval: 5000 // <-- (Milliseconds) Fastest interval your app / server can handle updates
+        //Both
+        desiredAccuracy: 20, // Desired Accuracy of the location updates (lower means more accurate but more battery consumption)
+        distanceFilter: 1, // (Meters) How far you must move from the last point to trigger a location update
+        debug: false, // <-- Enable to show visual indications when you receive a background location update
+        interval: 9000, // (Milliseconds) Requested Interval in between location updates.
+        // useActivityDetection: true, // Uses Activitiy detection to shut off gps when you are still (Greatly enhances Battery Life)
+
+
       };
 
       this.backgroundGeolocation.configure(config)
@@ -104,14 +101,14 @@ export class AppComponent {
 
           this.backgroundGeolocation.on(BackgroundGeolocationEvents.location)
             .subscribe((location: BackgroundGeolocationResponse) => {
-              console.log('bg - loc main', location);
               this.lat = location.latitude;
               this.long = location.longitude;
               let address = {
                 lat: this.lat,
                 long: this.long
               };
-              if(this.userData){
+              this.SocService.emit('locatoinUpdate', address)
+              if (this.userData) {
                 console.log('we have user data let update location from app.ts')
                 this.userData.data[0] = address;
                 this.updateMyLocation();
@@ -140,8 +137,8 @@ export class AppComponent {
     });
   }
 
-lat =0;
-long = 0;
+  lat = 0;
+  long = 0;
   updateMyLocation() {
     this.userService.updateUserLocation(this.userData._id, this.userData).subscribe(res => {
       console.log('res  ' + JSON.stringify(res))
@@ -368,7 +365,7 @@ long = 0;
   logout() {
     this.cap.removeName('authTokk');
     this.utilitService.logoutUser().then(data => {
-      
+
       if (data) {
         this.router.navigate(['/login'], { replaceUrl: true });
         window.app.backgroundGeolocation.stop()

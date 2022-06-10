@@ -8,6 +8,7 @@ import { utilityService } from './../../shared/services/utility.service';
 import { jobService } from './../../shared/services/job.service';
 import { geoLocationService } from './../../shared/services/geoLocation.service';
 import { BackgroundGeolocation, BackgroundGeolocationConfig, BackgroundGeolocationEvents, BackgroundGeolocationResponse } from '@awesome-cordova-plugins/background-geolocation/ngx';
+import { SocService } from './../../shared/services/socket.service';
 
 declare var window;
 
@@ -64,6 +65,7 @@ export class DashboardPage implements OnInit {
     private loadingController: LoadingController,
     private jobService: jobService,
     private backgroundGeolocation: BackgroundGeolocation,
+    private SocService: SocService,
     private router: Router,
   ) {
     this.userAuth = this.data.UserAuthData;
@@ -80,12 +82,14 @@ export class DashboardPage implements OnInit {
             lat: this.lat,
             long: this.long
           };
-          if(this.userData){
+
+          this.SocService.emit('locatoinUpdate', address)
+          if (this.userData) {
             console.log('we have user data let update location from dashboard.ts')
             this.userData.data[0] = address;
             this.updateMyLocation();
           }
-        
+
           // IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
           // and the background-task may be completed.  You must do this regardless if your operations are successful or not.
           // IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
@@ -133,7 +137,7 @@ export class DashboardPage implements OnInit {
   myChange(ev) {
     console.log('change method call')
     if (this.isActive == true) {
-      
+
       this.geoLocationService.getUserByIdAndUpdateLocation(this.data.UserAuthData._id);
       this.start();
     } else {
